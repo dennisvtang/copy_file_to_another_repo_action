@@ -31,7 +31,11 @@ This GitHub Action copies a file from the current repository to a location in an
           env:
             API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
           with:
-            source_file: 'test2.md test1.md'
+            source_file: |
+              'test2.md'
+              'test1.md'
+              '/copy_folder'
+              '/copy_files_in_folder/'
             destination_repo: 'dmnemec/release-test'
             destination_folder: 'test-dir'
             user_email: 'example@email.com'
