@@ -44,8 +44,7 @@ then
   cp -R "$INPUT_SOURCE_FILES" "$DEST_COPY"
 else
   echo "rsync mode detected"
-  sources=($INPUT_SOURCE_FILES)
-  for value in "${sources[@]}"; do
+  for value in $INPUT_SOURCE_FILES; do
     rsync -avrh "$value" "$DEST_COPY"
   done
 fi
