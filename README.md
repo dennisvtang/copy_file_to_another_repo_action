@@ -1,3 +1,16 @@
+# Changes from original action
+This github action differs from the [original action](https://github.com/dmnemec/copy_file_to_another_repo_action) in the last step. When pushing the commit it is done with `--force`. This was to fix an error I was having when running the action when the destination branch existed and had changes.
+
+The error I encountered
+```
+error: failed to push some refs to REPO
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+```
+
 # copy_file_to_another_repo_action
 This GitHub Action copies a file from the current repository to a location in another repository
 
