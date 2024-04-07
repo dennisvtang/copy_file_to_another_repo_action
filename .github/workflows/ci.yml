@@ -12,21 +12,18 @@ jobs:
   linter:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        - uses: actions/checkout@v4
 
-      - name: Run ShellCheck with reviewdog
-        uses: reviewdog/action-shellcheck@v1.20.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          level: style
+        - uses: reviewdog/action-shellcheck@v1.20.0
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            level: style
 
   formatter:
     needs: linter
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - uses: reviewdog/action-shfmt@v1
         with:
