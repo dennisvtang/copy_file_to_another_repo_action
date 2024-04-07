@@ -16,5 +16,6 @@ jobs:
       - name: Run shellcheck with reviewdog
         uses: reviewdog/action-shellcheck@v1.20.0
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           level: style
           fail_on_error: true
