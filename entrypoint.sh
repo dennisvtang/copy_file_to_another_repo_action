@@ -71,11 +71,11 @@ then
 
   if [ -z "$INPUT_USE_FORCE" ]
   then
-    echo "Pushing git commit with --force"
-    git push --force -u origin HEAD:"$OUTPUT_BRANCH"
-  else
     echo "Pushing git commit"
     git push -u origin HEAD:"$OUTPUT_BRANCH"
+  else
+    echo "Pushing git commit with --force"
+    git push --force -u origin HEAD:"$OUTPUT_BRANCH"
   fi
 
 else
