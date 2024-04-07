@@ -13,16 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # better terminal output
-      - name: Run ShellCheck
-        uses: azohra/shell-linter@latest
-        with:
-          path: "entrypoint.sh"
-
       # can only add github annotations on changed files
       - name: Run ShellCheck with reviewdog
         uses: reviewdog/action-shellcheck@v1.20.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           level: style
-          fail_on_error: true
+
+      # better terminal output
+      - name: Run ShellCheck
+        uses: azohra/shell-linter@latest
+        with:
+          path: "entrypoint.sh"
