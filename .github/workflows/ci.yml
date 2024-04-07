@@ -9,7 +9,7 @@ on:
 jobs:
   # can only add github annotations on changed files
   # doesn't fail if issues are found outside of changed files
-  linter-annotations:
+  linter:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,15 +20,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           level: style
-
-  # better terminal output
-  linter-terminal:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run ShellCheck
-        uses: azohra/shell-linter@latest
-        with:
-          path: "entrypoint.sh"
