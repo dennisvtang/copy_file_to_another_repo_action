@@ -8,6 +8,7 @@ on:
 
 jobs:
   # can only add github annotations on changed files
+  # doesn't fail if issues are found outside of changed files
   linter-annotations:
     runs-on: ubuntu-latest
     steps:
