@@ -7,20 +7,26 @@ on:
       - master
 
 jobs:
-  linter:
+  # can only add github annotations on changed files
+  linter-annotations:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # can only add github annotations on changed files
       - name: Run ShellCheck with reviewdog
         uses: reviewdog/action-shellcheck@v1.20.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           level: style
 
-      # better terminal output
+  # better terminal output
+  linter-terminal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Run ShellCheck
         uses: azohra/shell-linter@latest
         with:
