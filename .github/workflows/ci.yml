@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  # can only add github annotations on changed files
+  # doesn't fail if issues are found outside of changed files
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck with reviewdog
+        uses: reviewdog/action-shellcheck@v1.20.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          level: style
+
+  formatter:
+    needs: linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: reviewdog/action-shfmt@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
+          filter_mode: nofilter
