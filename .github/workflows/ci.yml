@@ -15,3 +15,6 @@ jobs:
 
       - name: Run shellcheck with reviewdog
         uses: reviewdog/action-shellcheck@v1.20.0
+        with:
+          level: style
+          fail_on_error: true
