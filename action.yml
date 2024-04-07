@@ -35,6 +35,9 @@ inputs:
     description: 'Git server host, default github.com'
     required: false
     default: github.com
+  use_force:
+    description: "Use '--force' flag when pushing changes"
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -49,6 +52,7 @@ runs:
     - ${{ inputs.git-server }}
     - ${{ inputs.rename }}
     - ${{ inputs.use-rsync }}
+    - ${{ inputs.use-force }}
 branding:
   icon: 'git-commit'
   color: 'green'
