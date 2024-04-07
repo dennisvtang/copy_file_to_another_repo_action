@@ -28,14 +28,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run beautysh
-        uses: illvart/beautysh-action@latest
-        with:
-          args: '*.sh --indent-size 4'
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: '[auto] ci: apply beautysh changes'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: reviewdog/action-shfmt@v1
