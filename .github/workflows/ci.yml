@@ -12,7 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Run ShellCheck
-        uses: azohra/shell-linter@latest
-        with:
-          path: "entrypoint.sh"
+
+      - name: Run shellcheck with reviewdog
+        uses: reviewdog/action-shellcheck@v1.20.0
