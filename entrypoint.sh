@@ -63,7 +63,7 @@ git add .
 if git status | grep -q "Changes to be committed"; then
   git commit --message "$INPUT_COMMIT_MESSAGE"
 
-  if [ -n "$INPUT_USE_FORCE" ]; then
+  if [ -n "$INPUT_PUSH_WITH_FORCE" ]; then
     echo "Pushing git commit with --force"
     git push --force -u origin HEAD:"$OUTPUT_BRANCH"
   else
