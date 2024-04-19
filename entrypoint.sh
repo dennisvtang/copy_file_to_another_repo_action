@@ -54,14 +54,17 @@ if [ -n "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
   OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE"
 fi
 
-if [ -z "$INPUT_COMMIT_MESSAGE" ]; then
-  INPUT_COMMIT_MESSAGE="Update from https://$INPUT_GIT_SERVER/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
+if [ -z "$INPUT_COMMIT_TITLE" ]; then
+  INPUT_COMMIT_TITLE="Update from ${GITHUB_REPOSITORY}"
+fi
+if [ -z "$INPUT_COMMIT_DESCRIPTION" ]; then
+  INPUT_COMMIT_DESCRIPTION="Update from https://$INPUT_GIT_SERVER/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
 fi
 
 echo "Adding git commit"
 git add .
 if git status | grep -q "Changes to be committed"; then
-  git commit --message "$INPUT_COMMIT_MESSAGE"
+  git commit --message "$INPUT_COMMIT_TITLE" --message "$INPUT_COMMIT_DESCRIPTION"
 
   if [ -n "$INPUT_PUSH_WITH_FORCE" ]; then
     echo "Pushing git commit with --force"
