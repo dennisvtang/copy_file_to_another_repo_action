@@ -22,8 +22,11 @@ inputs:
   destination_branch_create:
     description: 'Destination branch to create for this commit'
     required: false
-  commit_message:
-    description: 'A custom message for the commit'
+  commit_title:
+    description: 'A custom message for the commit title. Defaults to "Update from ${GITHUB_REPOSITORY}"'
+    required: false
+  commit_description:
+    description: 'A custom message for the commit description. Defaults to "Update from https://github.com/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"'
     required: false
   rename:
     description: 'Rename the destination file'
