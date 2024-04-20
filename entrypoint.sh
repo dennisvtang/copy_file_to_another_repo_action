@@ -3,6 +3,24 @@
 set -e
 set -x
 
+function get_destination_path() {
+  echo "get_destination_path($1)"
+
+  DESTINATION_PATH="$CLONE_DIR"
+  if [ -n "$INPUT_DESTINATION_FOLDER" ]; then
+    DESTINATION_PATH="$DESTINATION_PATH/$INPUT_DESTINATION_FOLDER"
+  fi
+  if [ -n "$INPUT_RENAME" ]; then
+    echo "Setting new filename: ${INPUT_RENAME}"
+    DESTINATION_PATH="$DESTINATION_PATH/$INPUT_RENAME"
+  else
+    echo "Using existing name"
+    DESTINATION_PATH="$DESTINATION_PATH/$(basename $1)"
+  fi
+
+  echo "$DESTINATION_PATH"
+}
+
 if [ -z "$INPUT_SOURCE_FILES" ]; then
   echo "Source file must be defined"
   return 1
@@ -26,13 +44,6 @@ git config --global user.name "$INPUT_USER_NAME"
 git config --global --add safe.directory '*'
 git clone --single-branch --branch "$INPUT_DESTINATION_BRANCH" "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GIT_SERVER/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
-if [ -n "$INPUT_RENAME" ]; then
-  echo "Setting new filename: ${INPUT_RENAME}"
-  DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER/$INPUT_RENAME"
-else
-  DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
-fi
-
 echo "Copying contents to git repo"
 mkdir -p "$CLONE_DIR"/"$INPUT_DESTINATION_FOLDER"
 if [ -z "$INPUT_USE_RSYNC" ]; then
@@ -43,7 +54,7 @@ else
   echo "rsync mode detected"
   for value in "${INPUT_SOURCE_FILES[@]}"; do
     mkdir -p "$(dirname "$value")"
-    rsync -avrh "$value" "$DEST_COPY"
+    rsync -avrh "$value" "$(get_destination_path "$value")"
   done
 fi
 
