@@ -42,6 +42,7 @@ if [ -z "$INPUT_USE_RSYNC" ]; then
 else
   echo "rsync mode detected"
   for value in $INPUT_SOURCE_FILES; do
+    mkdir -p dirname "$value"
     rsync -avrh "$value" "$DEST_COPY"
   done
 fi
