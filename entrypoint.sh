@@ -47,12 +47,12 @@ git clone --single-branch --branch "$INPUT_DESTINATION_BRANCH" "https://x-access
 echo "Copying contents to git repo"
 mkdir -p "$CLONE_DIR"/"$INPUT_DESTINATION_FOLDER"
 if [ -z "$INPUT_USE_RSYNC" ]; then
-  for value in "${INPUT_SOURCE_FILES[@]}"; do
+  for value in $INPUT_SOURCE_FILES; do
     cp -R "$value" "$DEST_COPY"
   done
 else
   echo "rsync mode detected"
-  for value in "${INPUT_SOURCE_FILES[@]}"; do
+  for value in $INPUT_SOURCE_FILES; do
     mkdir -p "$CLONE_DIR/$(dirname "$value")"
     echo "VALUE: $value"
     rsync -avrh "$value" "$(get_destination_path "$value")"
