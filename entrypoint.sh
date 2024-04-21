@@ -56,8 +56,6 @@ if [ -z "$INPUT_COMMIT_DESCRIPTION" ]; then
   INPUT_COMMIT_DESCRIPTION="Update from https://$INPUT_GIT_SERVER/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
 fi
 
-git pull
-
 echo "Adding git commit"
 git add .
 if git status | grep -q "Changes to be committed"; then
@@ -68,6 +66,7 @@ if git status | grep -q "Changes to be committed"; then
     git push --force -u origin HEAD:"$OUTPUT_BRANCH"
   else
     echo "Pushing git commit"
+    git pull -u origin HEAD:"$OUTPUT_BRANCH"
     git push -u origin HEAD:"$OUTPUT_BRANCH"
   fi
 
