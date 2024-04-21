@@ -26,6 +26,7 @@ git config --global user.name "$INPUT_USER_NAME"
 git config --global --add safe.directory '*'
 git clone --single-branch --branch "$INPUT_DESTINATION_BRANCH" "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GIT_SERVER/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
+cd "$CLONE_DIR"
 if [ -n "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
   echo "Creating new branch: ${INPUT_DESTINATION_BRANCH_CREATE}"
   git fetch
@@ -48,8 +49,6 @@ else
     rsync -avrh "$value" "$CLONE_DIR/$value"
   done
 fi
-
-cd "$CLONE_DIR"
 
 if [ -z "$INPUT_COMMIT_TITLE" ]; then
   INPUT_COMMIT_TITLE="Update from ${GITHUB_REPOSITORY}"
