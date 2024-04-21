@@ -15,7 +15,7 @@ function get_destination_path() {
     DESTINATION_PATH="$DESTINATION_PATH/$INPUT_RENAME"
   else
     echo "Using existing name"
-    DESTINATION_PATH="$DESTINATION_PATH/$(basename $1)"
+    DESTINATION_PATH="$DESTINATION_PATH/$(basename "$1")"
   fi
 
   echo "$DESTINATION_PATH"
