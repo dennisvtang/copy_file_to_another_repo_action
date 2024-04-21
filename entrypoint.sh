@@ -26,6 +26,13 @@ git config --global user.name "$INPUT_USER_NAME"
 git config --global --add safe.directory '*'
 git clone --single-branch --branch "$INPUT_DESTINATION_BRANCH" "https://x-access-token:$API_TOKEN_GITHUB@$INPUT_GIT_SERVER/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
+if [ -n "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
+  echo "Creating new branch: ${INPUT_DESTINATION_BRANCH_CREATE}"
+  git checkout -b "$INPUT_DESTINATION_BRANCH_CREATE"
+  git pull origin "$INPUT_DESTINATION_BRANCH_CREATE"
+  OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE"
+fi
+
 echo "Copying contents to git repo"
 mkdir -p "$CLONE_DIR"/"$INPUT_DESTINATION_FOLDER"
 if [ -z "$INPUT_USE_RSYNC" ]; then
@@ -42,13 +49,6 @@ else
 fi
 
 cd "$CLONE_DIR"
-
-if [ -n "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
-  echo "Creating new branch: ${INPUT_DESTINATION_BRANCH_CREATE}"
-  git checkout -b "$INPUT_DESTINATION_BRANCH_CREATE"
-  git pull origin "$INPUT_DESTINATION_BRANCH_CREATE"
-  OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE"
-fi
 
 if [ -z "$INPUT_COMMIT_TITLE" ]; then
   INPUT_COMMIT_TITLE="Update from ${GITHUB_REPOSITORY}"
