@@ -29,7 +29,7 @@ git clone --single-branch --branch "$INPUT_DESTINATION_BRANCH" "https://x-access
 if [ -n "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
   echo "Creating new branch: ${INPUT_DESTINATION_BRANCH_CREATE}"
   git fetch
-  git switch -c "$INPUT_DESTINATION_BRANCH_CREATE" origin/"$INPUT_DESTINATION_BRANCH_CREATE"
+  git switch "$INPUT_DESTINATION_BRANCH_CREATE"
   OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE"
 fi
 
