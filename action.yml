@@ -7,9 +7,10 @@ inputs:
   destination_repo:
     description: 'Destination repository'
     required: true
-  destination_folder:
-    description: 'Directory to push the file to'
-    required: false
+  # todo doesn't work
+  # destination_folder:
+  #   description: 'Directory to push the file to'
+  #   required: false
   user_email:
     description: 'Email for the git commit'
     required: true
@@ -28,9 +29,10 @@ inputs:
   commit_description:
     description: 'A custom message for the commit description. Defaults to "Update from https://github.com/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"'
     required: false
-  rename:
-    description: 'Rename the destination file'
-    required: false
+  # todo doesn't work
+  # rename:
+  #   description: 'Rename the destination file'
+  #   required: false
   use_rsync:
     description: 'Copy files/directories using rsync instead of cp. Experimental feature, please know your use case'
     required: false

@@ -3,24 +3,6 @@
 set -e
 set -x
 
-function get_destination_path() {
-  echo "get_destination_path($1)"
-
-  DESTINATION_PATH="$CLONE_DIR"
-  if [ -n "$INPUT_DESTINATION_FOLDER" ]; then
-    DESTINATION_PATH="$DESTINATION_PATH/$INPUT_DESTINATION_FOLDER"
-  fi
-  if [ -n "$INPUT_RENAME" ]; then
-    echo "Setting new filename: ${INPUT_RENAME}"
-    DESTINATION_PATH="$DESTINATION_PATH/$INPUT_RENAME"
-  else
-    echo "Using existing name"
-    DESTINATION_PATH="$DESTINATION_PATH/$(basename "$1")"
-  fi
-
-  echo "$DESTINATION_PATH"
-}
-
 if [ -z "$INPUT_SOURCE_FILES" ]; then
   echo "Source file must be defined"
   return 1
@@ -55,7 +37,7 @@ else
   for value in $INPUT_SOURCE_FILES; do
     mkdir -p "$CLONE_DIR/$(dirname "$value")"
     echo "VALUE: $value"
-    rsync -avrh "$value" "$(get_destination_path "$value")"
+    rsync -avrh "$value" "$CLONE_DIR/$value"
   done
 fi
 
