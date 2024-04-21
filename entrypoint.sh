@@ -54,6 +54,7 @@ else
   echo "rsync mode detected"
   for value in "${INPUT_SOURCE_FILES[@]}"; do
     mkdir -p "$CLONE_DIR/$(dirname "$value")"
+    echo "VALUE: $value"
     rsync -avrh "$value" "$(get_destination_path "$value")"
   done
 fi
