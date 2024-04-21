@@ -43,6 +43,7 @@ This GitHub Action copies a file from the current repository to a location in an
             commit_message: 'A custom message for the commit'
 
 # Variables
+> This section is probably out of date, its best to reference the `action.yml` file directly.
 
 The `API_TOKEN_GITHUB` needs to be set in the `Secrets` section of your repository options. You can retrieve the `API_TOKEN_GITHUB` [here](https://github.com/settings/tokens) (set the `repo` permissions).
 
