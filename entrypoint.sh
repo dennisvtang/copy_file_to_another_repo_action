@@ -46,6 +46,7 @@ cd "$CLONE_DIR"
 if [ -n "$INPUT_DESTINATION_BRANCH_CREATE" ]; then
   echo "Creating new branch: ${INPUT_DESTINATION_BRANCH_CREATE}"
   git checkout -b "$INPUT_DESTINATION_BRANCH_CREATE"
+  git pull origin "$INPUT_DESTINATION_BRANCH_CREATE"
   OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE"
 fi
 
@@ -66,7 +67,6 @@ if git status | grep -q "Changes to be committed"; then
     git push --force -u origin HEAD:"$OUTPUT_BRANCH"
   else
     echo "Pushing git commit"
-    git pull origin HEAD:"$OUTPUT_BRANCH"
     git push -u origin HEAD:"$OUTPUT_BRANCH"
   fi
 
