@@ -56,6 +56,8 @@ if [ -z "$INPUT_COMMIT_DESCRIPTION" ]; then
   INPUT_COMMIT_DESCRIPTION="Update from https://$INPUT_GIT_SERVER/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
 fi
 
+git pull
+
 echo "Adding git commit"
 git add .
 if git status | grep -q "Changes to be committed"; then
