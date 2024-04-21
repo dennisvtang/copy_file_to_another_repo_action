@@ -66,7 +66,7 @@ if git status | grep -q "Changes to be committed"; then
     git push --force -u origin HEAD:"$OUTPUT_BRANCH"
   else
     echo "Pushing git commit"
-    git pull -u origin HEAD:"$OUTPUT_BRANCH"
+    git pull origin HEAD:"$OUTPUT_BRANCH"
     git push -u origin HEAD:"$OUTPUT_BRANCH"
   fi
 
